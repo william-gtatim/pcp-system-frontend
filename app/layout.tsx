@@ -4,6 +4,8 @@ import "./globals.css";
 import {Header} from "@/app/components/header";
 import Sidebar from "@/app/components/sidebar/sidebar";
 import Main from "@/app/components/main";
+import QueryProvider from "@/app/queryProvider";
+import React from "react";
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
@@ -24,16 +26,18 @@ export default function RootLayout({
   return (
       <html lang="pt-BR" className={inter.variable}>
       <body className={`min-h-screen ${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <div className="flex min-h-screen flex-col">
-              <Header />
-              <div className="flex flex-1">
-                  <Sidebar />
+          <QueryProvider>
+              <div className="flex min-h-screen flex-col">
+                  <Header />
+                  <div className="flex flex-1">
+                      <Sidebar />
 
-                  <Main>
-                      {children}
-                  </Main>
+                      <Main>
+                          {children}
+                      </Main>
+                  </div>
               </div>
-          </div>
+          </QueryProvider>
       </body>
       </html>
   );

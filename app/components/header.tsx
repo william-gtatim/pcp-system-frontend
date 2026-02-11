@@ -4,7 +4,7 @@ import {MobileSidebar} from "@/app/components/sidebar/mobileSidebar";
 
 export function Header() {
     return (
-        <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-color px-4 bg-white">
+        <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-color px-2 md:px-4 bg-white">
             <Link href="/" className="flex items-center gap-3">
                 <div className="flex lg:hidden">
                     <MobileSidebar />
