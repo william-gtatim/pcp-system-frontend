@@ -1,25 +1,41 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
-    DrawerContent, DrawerHeader, DrawerTitle,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
-import {Menu} from 'lucide-react'
-import Sidebar from "@/app/components/sidebar/sidebar";
-import MenuSidebar from "@/app/components/sidebar/menu";
+import { Menu } from 'lucide-react'
+import MenuSidebar from "@/app/components/sidebar/menu"
 
 export function MobileSidebar() {
+    const [open, setOpen] = useState(false)
+    const pathname = usePathname()
+
+    useEffect(() => {
+        setOpen(false)
+    }, [pathname])
+
     return (
-        <Drawer key="sidebar"  direction="left" >
+        <Drawer
+            direction="left"
+            open={open}
+            onOpenChange={setOpen}
+        >
             <DrawerTrigger asChild>
                 <Button variant="outline">
                     <Menu strokeWidth={1.25} />
                 </Button>
             </DrawerTrigger>
 
-            <DrawerContent className="data-[vaul-drawer-direction=bottom]:max-h-[50vh] data-[vaul-drawer-direction=top]:max-h-[50vh]">
+            <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle >Menu</DrawerTitle>
+                    <DrawerTitle>Menu</DrawerTitle>
                 </DrawerHeader>
                 <MenuSidebar />
             </DrawerContent>
