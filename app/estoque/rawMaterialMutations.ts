@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/apiClient';
-import type {RawMaterialType} from "@/app/estoque/rawMaterialTypes";
+import { RawMaterialType } from "@/app/estoque/rawMaterialQueries";
 import {rawMaterialKey} from "@/app/estoque/rawMaterialQueries";
 
 type RawMaterialDTO = Omit<RawMaterialType, "id" | "code">

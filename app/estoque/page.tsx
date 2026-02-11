@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RawMaterialTable from "@/app/estoque/table/rawMaterialTable";
 import EditRawMaterialDialog from "@/app/estoque/editor/editRawMaterial";
-import { RawMaterialType } from "@/app/estoque/rawMaterialTypes";
+import { RawMaterialType } from "@/app/estoque/rawMaterialQueries";
 
 export default function RawMaterialPage() {
     const [dialogOpen, setDialogOpen] = useState(false);

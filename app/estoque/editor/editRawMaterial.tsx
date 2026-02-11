@@ -12,7 +12,7 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useEffect, useState } from "react";
-import { RawMaterialType } from "@/app/estoque/rawMaterialTypes";
+import { RawMaterialType } from "@/app/estoque/rawMaterialQueries";
 import {
     useCreateRawMaterialMutation,
     useUpdateRawMaterialMutation,

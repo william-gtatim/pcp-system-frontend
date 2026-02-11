@@ -7,29 +7,39 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { RawMaterialType } from "@/app/estoque/rawMaterialQueries";
-import { useRawMaterialsQuery } from "@/app/estoque/rawMaterialQueries";
-import DeleteRawMaterial from "@/app/estoque/editor/deleteRawMaterial";
+import { ProductType } from "@/app/produtos/productQueries";
+import { useProductsQuery } from "@/app/produtos/productQueries";
+import DeleteProduct from "@/app/produtos/editor/deleteProduct";
 import { SpinnerBlock } from "@/components/ui/spinner";
 import EmptyState from "@/components/ui/EmptyState";
 
 type Props = {
-    onEdit: (item: RawMaterialType) => void;
+    onEdit: (item: ProductType) => void;
 };
 
-export default function RawMaterialTable({ onEdit }: Props) {
-    const { data = [], isLoading } = useRawMaterialsQuery();
+export default function ProductTable({ onEdit }: Props) {
+    const { data = [], isLoading } = useProductsQuery();
+
+    console.log("Products:", data);
+
 
     if (isLoading) {
-        return <div className="pt-5"><SpinnerBlock /></div>;
+        return (
+            <div className="pt-5">
+                <SpinnerBlock />
+            </div>
+        );
     }
-    if(!isLoading && data.length === 0) {
-        return <div className="pt-10">
-            <EmptyState
-                title="Nenhuma matéria-prima cadastrada"
-                description="Adicione os insumos para controlar o estoque"
-            />
-        </div>
+
+    if (!isLoading && data.length === 0) {
+        return (
+            <div className="pt-10">
+                <EmptyState
+                    title="Nenhum produto cadastrado"
+                    description="Adicione produtos para planejar a produção"
+                />
+            </div>
+        );
     }
 
     return (
@@ -38,7 +48,7 @@ export default function RawMaterialTable({ onEdit }: Props) {
                 <TableRow>
                     <TableHead>Código</TableHead>
                     <TableHead>Nome</TableHead>
-                    <TableHead>Quantidade</TableHead>
+                    <TableHead>Valor</TableHead>
                     <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
             </TableHeader>
@@ -48,7 +58,12 @@ export default function RawMaterialTable({ onEdit }: Props) {
                     <TableRow key={item.id}>
                         <TableCell>{item.code}</TableCell>
                         <TableCell>{item.name}</TableCell>
-                        <TableCell>{item.stockQuantity}</TableCell>
+                        <TableCell>
+                            {new Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                            }).format(item.price)}
+                        </TableCell>
                         <TableCell className="text-right space-x-2">
                             <Button
                                 size="sm"
@@ -57,7 +72,7 @@ export default function RawMaterialTable({ onEdit }: Props) {
                             >
                                 Editar
                             </Button>
-                            <DeleteRawMaterial id={item.id} />
+                            <DeleteProduct id={item.id} />
                         </TableCell>
                     </TableRow>
                 ))}
