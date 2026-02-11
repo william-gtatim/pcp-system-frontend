@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/apiClient';
 import {ProductType} from "@/app/produtos/productQueries";
 import { productKey } from "@/app/produtos/productQueries";
+import {planningKey} from "@/app/planning/planningQueries";
 
 export type ProductCompositionDTO = {
     rawMaterialId: number
@@ -22,6 +23,7 @@ export function useCreateProductMutation() {
             apiClient.post<ProductType>('/products', data),
 
         onSuccess: (created) => {
+            queryClient.invalidateQueries({ queryKey: planningKey })
             queryClient.setQueryData<ProductType[]>(
                 productKey,
                 old => old ? [created, ...old] : [created]
@@ -38,6 +40,7 @@ export function useUpdateProductMutation() {
             apiClient.put<ProductType>(`/products/${id}`, data),
 
         onSuccess: (updated) => {
+            queryClient.invalidateQueries({ queryKey: planningKey })
             queryClient.setQueryData<ProductType[]>(
                 productKey,
                 old =>
@@ -61,6 +64,7 @@ export function useDeleteProductMutation() {
             apiClient.delete<void>(`/products/${id}`),
 
         onSuccess: (_, id) => {
+            queryClient.invalidateQueries({ queryKey: planningKey })
             queryClient.setQueryData<ProductType[]>(
                 productKey,
                 old => old ? old.filter(item => item.id !== id) : []

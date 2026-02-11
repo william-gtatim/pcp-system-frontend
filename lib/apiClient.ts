@@ -9,7 +9,11 @@ export type ApiError = {
     errors: ApiErrorDetail[];
 };
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL
+
+if(!BASE_URL){
+    alert("A url do servidor não está defina na variável de ambiente")
+}
 
 async function request<T>(
     url: string,

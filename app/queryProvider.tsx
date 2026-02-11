@@ -6,14 +6,10 @@ import {
     QueryCache,
     MutationCache,
 } from '@tanstack/react-query'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { toast } from 'sonner'
 
-export default function QueryProvider({
-                                          children,
-                                      }: {
-    children: React.ReactNode
-}) {
+export default function QueryProvider({ children }: { children: React.ReactNode }) {
     const [queryClient] = useState(
         () =>
             new QueryClient({
@@ -27,6 +23,17 @@ export default function QueryProvider({
                         showErrorToast(error)
                     },
                 }),
+                defaultOptions: {
+                    queries: {
+                        staleTime: 1000 * 60 * 5,
+                        gcTime: 1000 * 60 * 10,
+                        retry: 1,
+                        refetchOnWindowFocus: false,
+                    },
+                    mutations: {
+                        retry: 0,
+                    },
+                },
             })
     )
 

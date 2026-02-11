@@ -23,6 +23,7 @@ export function MobileSidebar() {
 
     return (
         <Drawer
+            modal
             direction="left"
             open={open}
             onOpenChange={setOpen}
@@ -33,7 +34,7 @@ export function MobileSidebar() {
                 </Button>
             </DrawerTrigger>
 
-            <DrawerContent>
+            <DrawerContent aria-describedby={undefined}>
                 <DrawerHeader>
                     <DrawerTitle>Menu</DrawerTitle>
                 </DrawerHeader>

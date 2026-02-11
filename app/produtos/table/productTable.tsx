@@ -18,9 +18,7 @@ type Props = {
 };
 
 export default function ProductTable({ onEdit }: Props) {
-    const { data = [], isLoading } = useProductsQuery();
-
-    console.log("Products:", data);
+    const { data = [], isLoading, isFetching } = useProductsQuery();
 
 
     if (isLoading) {

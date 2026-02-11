@@ -58,14 +58,19 @@ export default function EditRawMaterialDialog({
         if (isEdit && rawMaterial) {
             updateMutation.mutate(
                 { id: rawMaterial.id, data },
-                { onSuccess: () => onOpenChange(false) }
+                { onSuccess: () => handleSuccess() }
             );
         } else {
             createMutation.mutate(
                 data,
-                { onSuccess: () => onOpenChange(false) }
+                { onSuccess: () => handleSuccess() }
             );
         }
+
+    }
+
+    function handleSuccess(){
+        onOpenChange(false)
         setName("")
         setStockQuantity("");
     }

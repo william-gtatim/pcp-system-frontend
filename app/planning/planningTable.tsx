@@ -11,9 +11,8 @@ import EmptyState from "@/components/ui/EmptyState";
 import { useProductsQuery } from "./planningQueries";
 
 export default function PlanningTable() {
-    const { data = [], isLoading } = useProductsQuery();
+    const { data = [], isLoading, isFetching } = useProductsQuery();
 
-    console.log(data)
     if (isLoading) {
         return (
             <div className="pt-6">

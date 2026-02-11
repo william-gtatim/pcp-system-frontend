@@ -18,7 +18,7 @@ type Props = {
 };
 
 export default function RawMaterialTable({ onEdit }: Props) {
-    const { data = [], isLoading } = useRawMaterialsQuery();
+    const { data = [], isLoading, isFetching } = useRawMaterialsQuery();
 
     if (isLoading) {
         return <div className="pt-5"><SpinnerBlock /></div>;
