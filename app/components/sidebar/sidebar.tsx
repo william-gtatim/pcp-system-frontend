@@ -1,3 +1,4 @@
+'use client'
 import MenuSidebar from "@/app/components/sidebar/menu";
 
 

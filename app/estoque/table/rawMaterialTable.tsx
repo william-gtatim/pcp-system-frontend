@@ -38,7 +38,7 @@ export default function RawMaterialTable({ onEdit }: Props) {
                 <TableRow>
                     <TableHead>Código</TableHead>
                     <TableHead>Nome</TableHead>
-                    <TableHead>Quantidade</TableHead>
+                    <TableHead>Quantidade em estoque</TableHead>
                     <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
             </TableHeader>
@@ -48,7 +48,7 @@ export default function RawMaterialTable({ onEdit }: Props) {
                     <TableRow key={item.id}>
                         <TableCell>{item.code}</TableCell>
                         <TableCell>{item.name}</TableCell>
-                        <TableCell>{item.stockQuantity}</TableCell>
+                        <TableCell>{item.stockQuantity} unidades</TableCell>
                         <TableCell className="text-right space-x-2">
                             <Button
                                 size="sm"

@@ -49,6 +49,7 @@ export default function ProductTable({ onEdit }: Props) {
                     <TableHead>Código</TableHead>
                     <TableHead>Nome</TableHead>
                     <TableHead>Valor</TableHead>
+                    <TableHead>Matérias-primas</TableHead>
                     <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
             </TableHeader>
@@ -57,13 +58,33 @@ export default function ProductTable({ onEdit }: Props) {
                 {data.map(item => (
                     <TableRow key={item.id}>
                         <TableCell>{item.code}</TableCell>
+
                         <TableCell>{item.name}</TableCell>
+
                         <TableCell>
                             {new Intl.NumberFormat("pt-BR", {
                                 style: "currency",
                                 currency: "BRL",
                             }).format(item.price)}
                         </TableCell>
+
+                        <TableCell>
+                            {item.composition.length === 0 ? (
+                                <span className="text-muted-foreground text-sm">
+                            Nenhuma matéria-prima
+                        </span>
+                            ) : (
+                                <ul className="space-y-1 text-sm">
+                                    {item.composition.map((c, index) => (
+                                        <li key={index} className="flex gap-2">
+                                            <span className="text-muted-foreground text-sm">{c.rawMaterialName}</span>
+                                            <span className="text-muted-foreground text-sm">({c.quantityRequired} unidades)</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </TableCell>
+
                         <TableCell className="text-right space-x-2">
                             <Button
                                 size="sm"
@@ -72,6 +93,7 @@ export default function ProductTable({ onEdit }: Props) {
                             >
                                 Editar
                             </Button>
+
                             <DeleteProduct id={item.id} />
                         </TableCell>
                     </TableRow>
