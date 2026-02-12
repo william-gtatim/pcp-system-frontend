@@ -11,15 +11,12 @@ export type ApiError = {
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
-if(!BASE_URL){
-    alert("A url do servidor não está defina na variável de ambiente")
-}
 
 async function request<T>(
     url: string,
     options?: RequestInit
 ): Promise<T> {
-    const response = await fetch(`${BASE_URL}${url}`, {
+    const response = await fetch(`${BASE_URL ?? 'http://localhost:8080'}${url}`, {
         headers: {
             'Content-Type': 'application/json',
         },
