@@ -13,6 +13,6 @@ export type ProductionPlanning = {
 export function useProductsQuery() {
     return useQuery({
         queryKey: planningKey,
-        queryFn: () => apiClient.get<ProductionPlanning[]>('/production-planing'),
+        queryFn: () => apiClient.get<{totalRevenue: number, items: ProductionPlanning[]}>('/production-planning'),
     });
 }

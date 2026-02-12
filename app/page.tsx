@@ -10,7 +10,7 @@ export default function ProductionPlanningPage() {
                     Sugestão de produção
                 </h1>
                 <p className="text-muted-foreground text-sm mt-2">
-                    Planejamento automático considerando disponibilidade de insumos e maximização da receita
+                    Produção possível considerando a matéria-prima disponível em estoque
                 </p>
             </div>
 
